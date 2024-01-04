@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Warehouse</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <!-- <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> -->
+    <!-- vendor css -->
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/assets/css/style_new.css">
+    <link rel="stylesheet" href="static/assets/css/font.css">
+
+</head>
+
+<body class="">
+
+
+    <section class="container-fluid">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">TWP System 2023 v1.0</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- [ optional-modal ] start -->
+                <div class="col-xl-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 id="header-order">สร้างใบอนุเคราะห์</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="modal-body">
+                                <h5>
+                                    ส่วนที่ 1 ข้อมูลโรงเรียน
+                                </h5>
+                                <div class="form-group">
+                                    <a class="btn btn-primary" data-toggle="modal"
+                                        data-target="#modalCustomer">เลือกโรงเรียน
+
+                                    </a>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">รหัสลูกค้า</span>
+                                            <input type="text" id="Cust_Code" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">ชื่อลูกค้า</span>
+                                            <input type="text" id="Cust_Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">ประเภท</span>
+                                            <input type="text" id="Cust_Type" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">จังหวัด</span>
+                                            <input type="text" id="Cust_Province" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">ที่อยู่ 1</span>
+                                            <input type="text" id="Cust_Add1" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">ที่อยู่ 2</span>
+                                            <input type="text" id="Cust_Add2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">รหัสไปรษณีย์</span>
+                                            <input type="text" id="Cust_ZipCode" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">ผู้ติดต่อ 1</span>
+                                            <input type="text" id="Cust_Contact1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">เบอร์โทร 1</span>
+                                            <input type="text" id="Cust_Tel1" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <span class="ml-1">เบอร์โทร 2</span>
+                                            <input type="text" id="Cust_Tel2" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    
+                                    <div class="row mt-3">
+                                        <table id="tbOrderProduct" class="table table-striped table-hover">
+                                            <thead class="theader">
+                                                <tr>
+                                                    <th class="text-center">รหัสรายสินค้า</th>
+                                                    <th class="text-center">ชื่อสินค้า</th>
+                                                    <th class="text-center">จำนวน</th>
+                                                    <th class="text-center">LOTNO</th>
+                                                    <th class="text-center">SERIALNO</th>
+                                                    <th class="text-center">EXPDATE</th>
+                                                    <th class="text-center">RECEIVEDATE</th>
+                                                    <th class="text-center">จัดการ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbOrderProductList">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> -->
+                                <hr>
+                                <h5 style="margin-top: 2rem;">
+                                    ส่วนที่ 2 ข้อมูลยอดขาย
+                                </h5>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <h5 class="ml-1">ยอดขายของโรงเรียน</h5>
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">Total</span>
+                                                <input type="text" id="total_1" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">Discount</span>
+                                                <input type="text" id="disc_1" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">NetTotal</span>
+                                                <input type="text" id="nettotal_1" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5 class="ml-1">ยอดขออนุเคราะห์</h5>
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">ยอดอนุเคราะห์</span>
+                                                <input type="text" id="sum_c" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">ยอด ผจก อนุมัติ</span>
+                                                <input type="text" id="sum_d" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <span class="ml-1">ยอด ผู้บริหาร อนุมัติ</span>
+                                                <input type="text" id="sum_e" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-12">
+                                                <span class="ml-1">ยอดรวมสุทธิ</span>
+                                                <input type="text" id="net_a" class="form-control">
+                                            </div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span class="ml-1">ยอดขออนุเคราะห์</span>
+                                                <input type="text" id="net_b" class="form-control">
+                                            </div>
+                                            <div class="col-md-2 col-sm-12">
+                                                <span class="ml-1 float-right">%</span>
+                                                <input type="text" id="percentage" onblur="recal_net_b()" placeholder="%" value="6"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <span class="ml-1">ยอดยืนยันขออนุเคราะห์</span>
+                                                <input type="text" id="net_c" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left">
+                                    <div class="row" style="color: #37474f;">
+                                        <div class="col">
+                                            <label>ธนาคาร</label>
+                                            <select id="bankaccount" class="form-control">
+                                                <option value="123-123-1234"> กสิกรไทย 123-123-1234 ปภังกร กฤตพุทธิกุล
+                                                </option>
+                                                <option value="552-223-1664"> กรุงศรี 552-223-1664 ปภังกร กฤตพุทธิกุล
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="color: #37474f;">
+                                        <div class="col">
+                                            <label>comment</label>
+                                            <textarea class="form-control" id="sale_comment" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <button type="button" id="btnRequestSave"
+                                            class="btn btn-success btn-lg float-right m-2"
+                                            onclick="create_request()">Save</button>
+                                        <button type="button" id="btnCancel"
+                                            class="btn btn-secondary btn-lg float-right m-2"
+                                            onclick="clear_request()">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ optional-modal ] end -->
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </section>
+    <input type="hidden" id="hidden_cust_id">
+    <input type="hidden" id="hidden_sale_id">
+    <input type="hidden" id="hidden_login_name">
+    <!-- -start modal product-->
+    <div class="modal fade" id="modalCustomer" tabindex="-1" role="dialog" aria-labelledby="modalCustomerTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modaltitle">ข้อมูลลูกค้า</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="pallet-group">
+                        <div class="container mt-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <table id="tbCustomer" name="editReceiveProduct"
+                                            class="table table-striped table-hover">
+                                            <thead class="theader">
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">รหัสลูกค้า</th>
+                                                    <th class="text-center">ชื่อลูกค้า</th>
+                                                    <th class="text-center">ประเภท</th>
+                                                    <th class="text-center">จังหวัด</th>
+                                                    <th class="text-center">ที่อยู่ 1</th>
+                                                    <th class="text-center">ที่อยู่ 2</th>
+                                                    <th class="text-center">ที่อยู่ 3</th>
+                                                    <th class="text-center">รหัสไปรษณีย์</th>
+                                                    <th class="text-center">ผู้ติดต่อ 1</th>
+                                                    <th class="text-center">ผู้ติดต่อ 2</th>
+                                                    <th class="text-center">เบอร์โทร 1</th>
+                                                    <th class="text-center">เบอร์โทร 2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbCustomerList">
+                                                {% for customer in customer_list %}
+                                                <tr class="table-active">
+                                                    <td class="text-center">
+                                                        <button class="btn btn-primary"
+                                                            onclick="selectCustomer('{{customer.Cust_Id}}')">เลือก</button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Code}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Name}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% if customer.Cust_Type == "1" %}
+                                                        ลูกค้าหลัก
+                                                        {% else %}
+                                                        ลูกค้าของลูกค้า
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Province}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Add1}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Add2}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Add3}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_ZipCode}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Contact1}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Contact2}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Tel1}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{customer.Cust_Tel2}}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required Js -->
+    <script src="static/assets/js/vendor-all.min.js"></script>
+    <script src="static/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="static/assets/js/pcoded.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="static/assets/js/cookies.js"></script>
+    <script src="static/assets/js/request.js"></script>
+    <script>
+        $("#tbCustomer").DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "responsive": true,
+        });
+    </script>
+</body>

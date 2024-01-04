@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TWP - System 2023</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Warehouse" />
+    <!-- <link rel="icon" href="static/assets/images/favicon.ico" type="image/x-icon"> -->
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/assets/css/style_new.css">
+    <link rel="stylesheet" href="static/assets/css/font.css">
+
+</head>
+
+<body class="">
+
+    <!-- [ Main Content ] start -->
+    <section class="container-fluid">
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">TWP System 2023 v1.0</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <!-- [ Main Content ] start -->
+            <div class="row">
+                <!-- [ Contextual-table ] start -->
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>รายการใบอนุเคราะห์</h4>
+                        </div>
+                        <div class="form-group">
+                            <div class="row m-3">
+                                <div class="col-md-4">
+                                    <span>รหัสพนักงาน</span>
+                                    <input type="text" id="Emp_Code" value="{{Emp_Code}}" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <span>ตำแหน่ง</span>
+                                    <input type="text" id="sum_c" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <span>เป้าขาย</span>
+                                    <input type="text" id="sum_c" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2 ml-2 mb-2">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    {% if Emp_Position == "4" %}
+                                    <!-- <button class="btn btn-success mr-4" onclick="getCustomer()">
+                                        สร้างใบอนุเคราะห์
+                                    </button> -->
+                                    <a href="/request?Emp_Code={{Emp_Code}}"
+                                        class="btn btn-success mr-4">สร้างใบอนุเคราะห์</a>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                        <div class="card-body table-border-style">
+                            <div class="table-responsive">
+                                <table id="tbTodoList" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">สถานะอนุมัติ</th>
+                                            <th class="text-center">สถานะจ่าย</th>
+                                            <th class="text-center">เลขเอกสาร</th>
+                                            <th class="text-center">ยอดขออนุเคราะห์</th>
+                                            <th class="text-center">ยอด ผจก อนุมัติ</th>
+                                            <th class="text-center">ยอด ผู้บริหาร อนุมัติ</th>
+                                            <th class="text-center">อัพเดทล่าสุด</th>
+                                            <th class="text-center">อัพเดทโดย</th>
+                                            <th class="text-center">จัดการ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for request in request_list %}
+                                        <tr class="table-active">
+                                            <td class="text-center">
+                                                {% if request.RStatus_Approve == 1 %}
+                                                รอ ผจก อนุมัติ
+                                                {% elif request.RStatus_Approve == 2 %}
+                                                ผจก ไม่อนุมัติ
+                                                {% elif request.RStatus_Approve == 3 %}
+                                                รอ ผู้บริหาร
+                                                {% elif request.RStatus_Approve == 4 %}
+                                                ผู้บริหาร ไม่อนุมัติ
+                                                {% elif request.RStatus_Approve == 5 %}
+                                                ผู้บริหาร อนุมัติ
+                                                {% else %}
+                                                ยกเลิก 
+                                                {% endif %}
+                                                {{request.RStatus_Approve}}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if request.RStatus_Pay == 1 %}
+                                                รออนุมัติ
+                                                {% elif request.RStatus_Pay == 2 %}
+                                                รอเบิกจ่าย
+                                                {% elif request.RStatus_Pay == 3 %}
+                                                จ่ายแล้ว
+                                                {% else %}
+                                                ยกเลิก
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Request_No}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Sum_C}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Sum_D}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Sum_E}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Updated_Date}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{request.Updated_By}}
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="#" class="btn btn-warning" title="setting"
+                                                    onclick="getproductid('{{request.Request_No}}')">
+                                                    แก้ไข
+                                                </a>
+                                                <a href="#" class="btn btn-danger" title="delete"
+                                                    onclick="deleteproduct('{{request.Request_No}}')">
+                                                    ยกเลิก
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Contextual-table ] end -->
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+    <!--start modal edit palletproduct-->
+
+    <!---end edit modal palletproduct-->
+    <!-- Required Js -->
+    <script src="static/assets/js/vendor-all.min.js"></script>
+    <script src="static/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="static/assets/js/pcoded.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="static/assets/js/todolist.js"></script>
+    <script src="static/assets/js/cookies.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tbTodoList").DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "responsive": true,
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    platform: linux/amd64
+    image: "registry.gitlab.com/armuro.rey.dev/container-registry/demo-web:1.0.0"
+    container_name: demo-web
+    network_mode: bridge
+    ports:
+      - "8009:5000"
+    environment:
+      - UrlAPI=${UrlAPI}
