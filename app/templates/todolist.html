@@ -44,17 +44,21 @@
                         </div>
                         <div class="form-group">
                             <div class="row m-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span>รหัสพนักงาน</span>
                                     <input type="text" id="Emp_Code" value="{{Emp_Code}}" class="form-control">
                                 </div>
-                                <div class="col-md-4">
-                                    <span>ตำแหน่ง</span>
-                                    <input type="text" id="sum_c" class="form-control">
+                                <div class="col-md-3">
+                                    <span>รหัสพนักงาน</span>
+                                    <input type="text" id="Emp_Code" value="{{sum_res.WSale_Name}}" class="form-control">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <span>ตำแหน่ง</span>
+                                    <input type="text" id="Dept_Name" class="form-control">
+                                </div>
+                                <div class="col-md-3">
                                     <span>เป้าขาย</span>
-                                    <input type="text" id="sum_c" class="form-control">
+                                    <input type="text" id="Goal_Total" value="{{sum_res.Item_Total}}" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -78,6 +82,7 @@
                                 <table id="tbTodoList" class="table">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">จัดการ</th>
                                             <th class="text-center">สถานะอนุมัติ</th>
                                             <th class="text-center">สถานะจ่าย</th>
                                             <th class="text-center">เลขเอกสาร</th>
@@ -86,12 +91,21 @@
                                             <th class="text-center">ยอด ผู้บริหาร อนุมัติ</th>
                                             <th class="text-center">อัพเดทล่าสุด</th>
                                             <th class="text-center">อัพเดทโดย</th>
-                                            <th class="text-center">จัดการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for request in request_list %}
                                         <tr class="table-active">
+                                            <td class="text-center">
+                                                <a href="#" class="btn btn-warning" title="setting"
+                                                    onclick="getproductid('{{request.Request_No}}')">
+                                                    แก้ไข
+                                                </a>
+                                                <a href="#" class="btn btn-danger" title="delete"
+                                                    onclick="deleteproduct('{{request.Request_No}}')">
+                                                    ยกเลิก
+                                                </a>
+                                            </td>
                                             <td class="text-center">
                                                 {% if request.RStatus_Approve == 1 %}
                                                 รอ ผจก อนุมัติ
@@ -137,16 +151,7 @@
                                             <td class="text-center">
                                                 {{request.Updated_By}}
                                             </td>
-                                            <td class="text-center">
-                                                <a href="#" class="btn btn-warning" title="setting"
-                                                    onclick="getproductid('{{request.Request_No}}')">
-                                                    แก้ไข
-                                                </a>
-                                                <a href="#" class="btn btn-danger" title="delete"
-                                                    onclick="deleteproduct('{{request.Request_No}}')">
-                                                    ยกเลิก
-                                                </a>
-                                            </td>
+                                            
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -175,6 +180,9 @@
     <script src="static/assets/js/cookies.js"></script>
     <script>
         $(document).ready(function () {
+            debugger;
+            var Dept_Name = getcookies("Dept_Name");
+            document.getElementById("Dept_Name").value = Dept_Name;
             $("#tbTodoList").DataTable({
                 "paging": true,
                 "searching": true,

@@ -1,9 +1,10 @@
+
+
 function getCustomer() {
     var Emp_Code = getcookies("Emp_Code");
     var tbody = document.getElementById('tbCustomerList');
     fetch('/api/get_customer?Emp_Code=' + Emp_Code).then(respoinse => respoinse.json()).then((data) => {
         for (var i = 0; i < data.data.length; i++) {
-            debugger;
             var customer = data.data[i];
             var row = tbody.insertRow();
             var cell1 = row.insertCell(0);

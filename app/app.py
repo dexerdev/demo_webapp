@@ -51,7 +51,8 @@ def todo_list():
     Emp_Position = request.args.get("Emp_Position")
     Emp_Code = request.args.get("Emp_Code")
     data = todolist_service.get_request_list(Emp_Id)
-    return render_template("todolist.html",Emp_Position=Emp_Position,Emp_Code=Emp_Code,request_list = data)
+    sum_res =  todolist_service.get_sum_sale(Emp_Code)
+    return render_template("todolist.html",Emp_Position=Emp_Position,Emp_Code=Emp_Code,request_list = data,sum_res=sum_res)
 
 @app.route('/request')
 def request_page():

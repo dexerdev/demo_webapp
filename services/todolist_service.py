@@ -149,7 +149,29 @@ def create_request(request_no, cust_id, sale_id, sum_a, sum_b, rate_b_percent, s
         print(e)
         return False  # or return an error response
     
-    
+def get_sum_sale(sale_code):
+    session = Session()
+    try:
+        # Execute the query
+        query = text("""
+            select WSale_Name ,sum( Item_Total ) as Item_Total 
+            from View_SO_List as so 
+            where so_status <> 13 and year(Inv_date) = 2023 and WSale_Code = :sale_code
+            group by WSale_Name
+        """)
+        result = session.execute(query, {"sale_code": sale_code}).fetchone()
+        if result != None :
+            columns = ["WSale_Name","Item_Total"]
+            data = dict(zip(columns, result))
+        else:
+            data = {}
+        return data
+    except Exception as e:
+        # Handle exceptions
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()
+        
 # def get_requestno(request_no):
 #     session = Session()
 #     try:

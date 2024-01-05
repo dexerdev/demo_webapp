@@ -13,7 +13,6 @@ function checklogin(){
             "Content-type": "application/json"
         }
     }).then(response => response.json()).then((data) => {
-        console.log(data.data);
         if (data.success) {
             Swal.fire({
                 title: 'ยินดีต้อนรับเข้าสู่ระบบ',
@@ -26,6 +25,7 @@ function checklogin(){
                 document.cookie = "Emp_Id=" + data.data.Emp_Id;
                 document.cookie = "Emp_Position=" + data.data.Emp_Position;
                 document.cookie = "username=" + username;
+                document.cookie = "Dept_Name=" + data.data.Dept_Name;
                 window.location.href = "/todolist?Emp_Id="+ data.data.Emp_Id + "&Emp_Position="+data.data.Emp_Position + "&Emp_Code="+data.data.Emp_Code;
             });
         } else {
